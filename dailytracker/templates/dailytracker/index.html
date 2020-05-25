@@ -1,0 +1,67 @@
+{% extends 'dailytracker/base.html' %}
+{% block content %}
+<h1 class="shadow-sm p-2 pr-4 pl-4 bg-white">Tracker:</h1>
+<form class="bg-white p-4 form-inline" method="POST">
+    {% csrf_token %}
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label for="claim_no">Claim No.</label>
+            {{form.claim_no}}
+        </div>
+        <div class="col-auto">
+            <label for="billed_charges">Billed Charges</label>
+            {{form.billed_charges}}
+        </div>
+        <div class="col-auto">
+            <label for="benefit">Benefit</label>
+            {{form.benefit}}
+        </div>
+        <div class="col-auto">
+            <label for="market">Market</label>
+            {{form.market}}
+        </div>
+        <div class="col-auto">
+            <label for="platform">Platform</label>
+            {{form.platform}}
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </div>
+    </div>
+</form>
+<div class="mt-2 p-2 bg-white">
+    <h2>Total Count:</h2>
+    <p>{{total_count}}</p>
+</div>
+<div class="mt-2 p-4 bg-white">
+    <h3>Today's Claims:</h3>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Claim No</th>
+                    <th scope="col">Billed Charges</th>
+                    <th scope="col">Benefit</th>
+                    <th scope="col">Market</th>
+                    <th scope="col">Platform</th>
+                    <th scope="col">AG ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for claim in today_claims %}
+                <tr>
+                    <td>{{ claim.date }}</td>
+                    <td>{{ claim.claim_no }}</td>
+                    <td>{{ claim.billed_charges }}</td>
+                    <td>{{ claim.benefit }}</td>
+                    <td>{{ claim.market }}</td>
+                    <td>{{ claim.platform }}</td>
+                    <td>{{ claim.user.username }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

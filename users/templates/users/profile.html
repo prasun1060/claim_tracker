@@ -1,0 +1,21 @@
+{% extends 'dailytracker/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="bg-white p-4">
+    <div class="p-4">
+        <h5>Username - <span class="text-muted">{{ username }}</span></h5>
+        <h5>Designation - <span class="text-muted">{{ designation }}</span></h5>
+        <h5>Supervisor - <span class="text-muted">{{ supervisor.username }}</span></h5>
+    </div>
+    <ul class="list-group list-group-flush" id="team-list">
+        <h5 class="border-bottom p-2 shadow-sm">Team Overview</h5>
+        {% if team_member_no == 0 %}
+        <li class="list-group-item">No team member</li>
+        {% else %}
+        {% for member in team %}
+        <li class="list-group-item">{{ member.member.username }}</li>
+        {% endfor %}
+        {% endif %}
+    </ul>
+</div>
+{% endblock content %}

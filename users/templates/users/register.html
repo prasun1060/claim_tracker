@@ -1,0 +1,13 @@
+{% extends 'dailytracker/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form class="bg-white p-4" method="POST">
+    {% csrf_token %}
+    <legend class="border-bottom pb-4">Register Here:</legend>
+    {{ form|crispy}}
+    <input type="submit" class="btn btn-primary" value="Register" />
+</form>
+<div>
+    <small class="text-muted">Already have an account? <a href="{% url 'login' %}" class="link">Login Here</a></small>
+</div>
+{% endblock content %}
